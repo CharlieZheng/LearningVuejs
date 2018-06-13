@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--
+    组件的两种注册方式，通过例子可以看出哪种的优先级高。
+
+-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>llllllllloooolllllllll</title>
+</head>
+
+
+<body>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <div id="app">
+        <input type="text" v-model="whos" />
+        <h1>按钮按了{{cnt}}次</h1>
+        <runoob v-on:click.native="customComponentListener" v-bind:message="whos" v-on:outer="outerListener"></runoob>
+    </div>
+
+    <script>
+        var Child = {
+            props: {
+                // 基础类型检测 （`null` 意思是任何类型都可以）
+                propA: Number,
+                // 多种类型
+                message: [String, Number],
+                // 必传且是字符串
+                propC: {
+                    type: String,
+                    required: true
+                },
+                // 数字，有默认值
+                propD: {
+                    type: Number,
+                    default: 100
+                },
+                // 数组／对象的默认值应当由一个工厂函数返回
+                propE: {
+                    type: Object,
+                    default: function () {
+                        return { message: 'hello' }
+                    }
+                },
+                // 自定义验证函数
+                propF: {
+                    validator: function (value) {
+                        return value > 10
+                    }
+                }
+            },
+            template: "<div><button v-on:click='innerListener()'>few</button><h1 style='color:#0f0'>{{message}}的自定义组件！</h1></div>",
+       methods:{
+                innerListener:function() {
+                  
+                    this.$emit('outer', "向外传出参数1", "向外传出参数2")
+                }
+            }
+             }
+
+        // 注册，不能在new方法后调用
+        Vue.component('runoob', {
+            props: ['message'],
+            template: "<div><h1>{{message}}的自定义组件！</h1></div>"
+    
+        })
+        // 创建根实例
+        var vm = new Vue({
+            el: '#app',
+            components: {
+                // <runoob> 将只在父模板可用
+                'runoob': Child
+            },
+            data: {
+                whos: "",
+                cnt:0
+            },
+            methods:{
+                outerListener:function(value, value2) {
+                    console.log(value, value2)
+                  this.cnt++
+                },
+                customComponentListener:function() {
+                    console.log("整个自定义组件的监听事件")
+                }
+            }
+        })
+        vm.whos = "郑汉荣"
+    </script>
+</body>
+
+</html>

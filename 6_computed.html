@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+    methods和computed的区别是一个需要在方法后面加括号一个则不需要
+
+    computed有一个好处是可以改变原始信息，其是对原始信息的一个封装
+
+    methods当然也可以，但是不能在html中当一个对象来用
+-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>llllllllloooolllllllll</title>
+</head>
+
+
+<body>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+
+
+    <div id="app">
+        <p>学生原始信息: {{ id+","+name+","+course }}</p>
+        <p>学生封装信息By computed: {{ getStudentInfo() }}</p>
+        <p>学生封装信息By methods: {{ studentInfo }}</p>
+        <button v-on:click="setStudentInfo('3 华罗庚 数学')" style="color: royalblue">改变</button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id:2,
+                name:"郑汉荣",
+                course:"Android"
+            },
+            computed: {
+                studentInfo
+                    : {
+                    // 计算属性的 getter
+                    get: function () {
+                        // `this` 指向 vm 实例
+                        return this.id+"\n"+this.name+"\n"+this.course+"\n"
+                    },
+                    set: function (value) {
+                        let temp = value.split(" ")
+                        if (temp.length < 3) return
+                        this.id = temp[0]
+                        this.name= temp[1]
+                        this.course = temp[2]
+                    }
+                }
+            },
+            methods: {
+                setStudentInfo: function (value) {
+                    this.studentInfo = value
+                },
+            
+                getStudentInfo: function () {
+                   
+                    return this.id+"\n"+this.name+"\n"+this.course+"\n"
+                }
+            }
+        })
+     
+    </script>
+
+
+</body>
+
+</html>

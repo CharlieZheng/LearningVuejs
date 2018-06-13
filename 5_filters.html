@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+    filters sample：把字符串先首字母大写再反转
+-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>llllllllloooolllllllll</title>
+</head>
+
+
+<body>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+
+    <div id="app">
+        {{ message | capitalize(1, "郑汉荣")|reverse}}
+      </div>
+          
+      <script>
+      new Vue({
+        el: '#app',
+        data: {
+          message: 'runoob'
+        },
+        filters: {
+          capitalize: function (value, value2 ,value3) {
+            if (!value) return ''
+            value = value.toString()
+            return value.charAt(0).toUpperCase() + value.slice(1) +value3+" " +value2
+          },
+          reverse: function(value) {
+            if  (!value) return value
+            value = value.toString()
+            return value.split("").reverse().join("")
+          }
+        }
+      })
+      </script>
+      
+</body>
+
+</html>

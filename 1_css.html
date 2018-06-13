@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+  1. v-bind:class属性传入一个json格式的字符串
+     键为类选择器，值为true或false
+
+  2. 当v-bind:style和v-bind:class一起使用时，前者的配置将覆盖后者
+-->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+</head>
+<style>
+  .class1 {
+    background: #444;
+    color: #eee;
+  }
+
+  .f1 {
+    color: #F00;
+  }
+
+  .f2 {
+    color: #ff0;
+  }
+</style>
+
+<body>
+  <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+
+  <div id="app">
+    <label for="r1">修改颜色</label>
+    <input type="checkbox" v-model="class_whatever" id="r1">
+    <br>
+    <br>
+    <div v-bind:style="{color:'#0f0'}" v-bind:class="{'class1': class_whatever, 'f1': true, 'f2': true}" >
+      directiva v-bind:class
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        class_whatever: false
+      }
+    });
+  </script>
+</body>
+
+</html>
