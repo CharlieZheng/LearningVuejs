@@ -47,6 +47,11 @@
        // 两个起到的作用将叠加在一起
         // $watch 是一个实例方法
         vm.$watch('kilometers', function (newValue, oldValue) {
+           /*
+           和什么的watch属性所声明的代码块作用一致
+           vm.kilometers = newValue;
+			  vm.meters = newValue * 1000;
+           */
             // 这个回调将在 vm.kilometers 改变后调用
             document.getElementById("info").innerHTML = "修改前值为: " + oldValue + "，修改后值为: " + newValue;
         })
