@@ -43,6 +43,8 @@
                 }
             }
         });
+       // 这里的$watch方法跟在Vue({})里面的watch属性的功能是一样的，它们都是监听data里的kilometers对象
+       // 两个起到的作用将叠加在一起
         // $watch 是一个实例方法
         vm.$watch('kilometers', function (newValue, oldValue) {
             // 这个回调将在 vm.kilometers 改变后调用
